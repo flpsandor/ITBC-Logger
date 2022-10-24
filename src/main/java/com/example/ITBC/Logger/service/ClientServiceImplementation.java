@@ -6,7 +6,9 @@ import com.example.ITBC.Logger.exception.RegistrationNotPosible;
 import com.example.ITBC.Logger.model.Client;
 import com.example.ITBC.Logger.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -29,16 +31,18 @@ public class ClientServiceImplementation implements ClientService {
         if(client.getPassword().length()<8){
             throw new RegistrationNotPosible("password at least 8 characters and one letter and one number");
         }
+        // TODO with validator
         return clientRepository.save(client);
     }
 
     @Override
-    public String login(LoginDto loginDto) throws ClientNotExistException {
+    public ResponseEntity.BodyBuilder login(LoginDto loginDto) throws ClientNotExistException {
         var client = clientRepository.findByUsername(loginDto.getUsername());
         if (Objects.isNull(client) || !client.getPassword().equals(loginDto.getPassword())) {
             throw new ClientNotExistException("Username or password incorrect");
         }
-       // TODO vratiti token i 200 OK
-        return client.getUsername();
+        HttpHeaders responseHeader = new HttpHeaders();
+        responseHeader.set("token",client.getUsername());
+        return ResponseEntity.ok().headers(responseHeader);
     }
 }
