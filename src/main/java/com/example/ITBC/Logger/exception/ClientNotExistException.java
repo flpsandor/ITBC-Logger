@@ -1,4 +1,4 @@
-package com.example.ITBC.Logger.error;
+package com.example.ITBC.Logger.exception;
 
 public class ClientNotExistException extends Exception{
 
