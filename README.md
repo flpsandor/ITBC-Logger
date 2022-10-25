@@ -72,15 +72,15 @@ created date
       "logType": int/enum
     }
     ```
-    -Request headers:
-      - 'Authorization' - token
-    -Responses:
-      - 201 - Created
-      - 400 - Bad Request
-        -Incorrect logType
-      - 401 - Unauthorization
-         -Incorrect token
-      - 413 - Payload too large
+  -Request headers:
+     - 'Authorization' - token
+  -Responses:
+     - 201 - Created
+     - 400 - Bad Request
+       -Incorrect logType
+     - 401 - Unauthorization
+        -Incorrect token
+     - 413 - Payload too large
         -Message should be less than 1024 character
 4. Search Log
   - HTTP Method: 'GET'
