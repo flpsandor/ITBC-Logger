@@ -69,12 +69,12 @@ created date
     ```json
     {
       "message":"string",
-      "logType": int/enum
+      "logType": 0
     }
     ```
-  -Request headers:
+  - Request headers:
      - 'Authorization' - token
-  -Responses:
+  - Responses:
      - 201 - Created
      - 400 - Bad Request
        -Incorrect logType
@@ -108,5 +108,43 @@ created date
       -Invalid logType
     - 401 - Unauthorized
       -Incorrect token
+5. Get all clients
+  - HTTP Method: 'GET'
+  - Endpoint URL: '/api/clients'
+  - Request headers:
+    - 'Authorization' - token (Admin token)
+  - Responses:
+    - 200 - OK
+      ```json
+      [
+        {
+          "id":"uuid",
+          "username":"string",
+          "email":"string",
+          "logCount":0
+        }
+      ]
+      ```
+   - 401 - Unauthorized
+    - Incorrect token
+   - 403 - Frobidden
+     - Correct token, but not admin
 
+6. Change client password
+  - HTTP Methdo: 'PATCH'
+  - Endpoint URL: '/api/clients/{id}/reset-password'
+  - Request body:
+    ```json
+      {
+        "password":"string"
+      }
+    ```
+   - Request headers:
+     -'Authorization' - token (Admin token)
+   - Responses:
+     - 204 - No content      
+     - 401 - Unauthorized
+      -Correct token, but not admin
+     - 403 - Forbidden
+      -Incorrect token
 
