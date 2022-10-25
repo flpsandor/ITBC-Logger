@@ -22,25 +22,91 @@ created date
 ## Endpoints
 
 1. Register
-- HTTP Method: 'POST'
-- Enpoint URL: '/api/clients/register'
-- Request body:
-```json
-{
-  "username":"string",
-  "password":"string",
-  "email":"string"
-}
-```
-###Responses:
-- 201 - Registered
-- 400 - Bad Request
-  - email must be valid
-  - username at least 3 characters
-  - password at least 8 characters and one letter and one number and one special
-- 409 - Conflict
-  - username already exist
-  - email already exist
+  - HTTP Method: 'POST'
+  - Enpoint URL: '/api/clients/register'
+  - Request body:
+  ```json
+  {
+    "username":"string",
+    "password":"string",
+    "email":"string"
+  }
+  ```
+  Responses:
+    - 201 - Registered
+    - 400 - Bad Request
+      - email must be valid
+      - username at least 3 characters
+      - password at least 8 characters and one letter and one number and one special
+  - 409 - Conflict
+      - username already exist
+      - email already exist
 
+2. Login
+  - HTTP Method: 'POST'
+  - Endpoint URL: '/api/clients/login'
+  - Request body:
+    ```json
+    {
+      "username": "string",
+      "password": "string"
+    }
+    ```
+    Responses:
+      - 200 - OK
+      ```json
+      {
+          "token":"string"
+       }
+      ```
+      - 400 - Bad Request
+        -username or password incorect
+
+3. Create log
+  - HTTP Method: 'POST'
+  - Endpoint URL: '/api/logs/create'
+  - Request body:
+    ```json
+    {
+      "message":"string",
+      "logType": int/enum
+    }
+    ```
+    -Request headers:
+      - 'Authorization' - token
+    -Responses:
+      - 201 - Created
+      - 400 - Bad Request
+        -Incorrect logType
+      - 401 - Unauthorization
+         -Incorrect token
+      - 413 - Payload too large
+        -Message should be less than 1024 character
+4. Search Log
+  - HTTP Method: 'GET'
+  - Endpoint URL: '/api/logs/search'
+  - Request params:
+    - 'dateFrom'
+    - 'dateTo'
+    - 'message'
+    - 'logType'
+  - Request headers:
+    - 'Authorization' - token
+  - Responses:
+    - 200 - OK
+      ```json
+      [  
+        {
+          "message":"string",
+          "logType":0,
+          "createdDate":"date"
+        }
+      ]  
+      ```
+    - 400 - Bad request
+      -Invalid dates
+      -Invalid logType
+    - 401 - Unauthorized
+      -Incorrect token
 
 
