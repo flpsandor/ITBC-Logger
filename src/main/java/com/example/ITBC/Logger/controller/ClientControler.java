@@ -5,8 +5,11 @@ import com.example.ITBC.Logger.model.Client;
 import com.example.ITBC.Logger.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -22,14 +25,13 @@ public class ClientControler {
 
     @PostMapping("/api/clients/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client register(@Valid @RequestBody Client client){
-        return clientService.register(client);
+    public ResponseEntity<Client> register(@RequestBody @Valid Client client){
+        return new ResponseEntity<>(clientService.register(client), HttpStatus.CREATED);
     }
 
     @PostMapping("/api/clients/login")
-    @ResponseStatus(HttpStatus.OK)
-    public String login(@RequestBody LoginDto loginDto){
-        return clientService.login(loginDto);
+    public ResponseEntity<String> login(@RequestBody @Valid LoginDto loginDto){
+        return new ResponseEntity<>(clientService.login(loginDto), HttpStatus.OK);
     }
 
     @GetMapping("/api/clients")

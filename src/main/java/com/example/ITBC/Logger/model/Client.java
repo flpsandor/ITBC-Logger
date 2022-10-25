@@ -1,7 +1,6 @@
 package com.example.ITBC.Logger.model;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -24,14 +23,16 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private UUID token = UUID.randomUUID();
     @NotEmpty
-    @Size(min=3)
+    @Size(min = 3,message = "username at least 3 characters")
     private String username;
     @NotEmpty
-    @Email
+    @Email(message = "email must be valid")
     private String email;
     @NotEmpty
-    @Pattern(regexp = "^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\\d]){1,})(?=(.*[\\W]){1,})(?!.*\\s).{8,}$")
+    @Pattern(regexp = "^(?=.*?[A-Z])(?=(.*[a-z])+)(?=(.*\\d)+)(?=(.*\\W)+)(?!.*\\s).{8,}$",
+    message = "password at least 8 characters and one letter and one number and one character")
     private String password;
     private UserType userType = UserType.USER;
 }
