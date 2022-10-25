@@ -1,22 +1,19 @@
 package com.example.ITBC.Logger.controller;
 
 import com.example.ITBC.Logger.dto.LoginDto;
+import com.example.ITBC.Logger.dto.PasswordDto;
 import com.example.ITBC.Logger.model.Client;
 import com.example.ITBC.Logger.service.ClientService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 public class ClientControler {
 
-    @Autowired
     private final ClientService clientService;
 
     public ClientControler(ClientService clientService) {
@@ -35,8 +32,12 @@ public class ClientControler {
     }
 
     @GetMapping("/api/clients")
-    @ResponseStatus(HttpStatus.OK)
-    public List<Client> getAllClient(){
-        return clientService.getAllClient();
+    public ResponseEntity<List<Client>> getAllClient(@RequestHeader(value="Authorization") String token){
+        return new ResponseEntity<>(clientService.getAllClient(token), HttpStatus.OK);
+    }
+
+    @PatchMapping("/api/clients/{id}/reset-password")
+    public ResponseEntity<Client> passwordChange(@RequestBody PasswordDto password, @RequestHeader(value="Authorization") String token, @PathVariable("id") Long id){
+        return new ResponseEntity<>(clientService.passwordChange(id,password,token),HttpStatus.CREATED);
     }
 }

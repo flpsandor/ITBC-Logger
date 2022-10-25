@@ -10,7 +10,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -23,7 +22,7 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private UUID token = UUID.randomUUID();
+    private String token;
     @NotEmpty
     @Size(min = 3,message = "username at least 3 characters")
     private String username;

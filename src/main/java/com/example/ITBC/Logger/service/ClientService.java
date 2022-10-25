@@ -1,8 +1,8 @@
 package com.example.ITBC.Logger.service;
 
 import com.example.ITBC.Logger.dto.LoginDto;
+import com.example.ITBC.Logger.dto.PasswordDto;
 import com.example.ITBC.Logger.model.Client;
-import org.springframework.http.server.ServerHttpResponse;
 
 import java.util.List;
 
@@ -11,5 +11,7 @@ public interface ClientService {
 
     String login(LoginDto loginDto);
 
-    List<Client> getAllClient();
+    List<Client> getAllClient(String token);
+
+    Client passwordChange(Long id, PasswordDto password, String token);
 }
