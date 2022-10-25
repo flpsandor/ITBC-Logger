@@ -18,8 +18,4 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     Client findByUsernameOrEmail(String username, String email);
 
     Client findByToken(String token);
-
-    @Transactional
-    @Query(value = "UPDATE client  SET password=:password WHERE id=:id", nativeQuery = true)
-    void changePasswordById(@Param("password") String password, @Param("id") Long id);
 }

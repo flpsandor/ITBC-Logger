@@ -16,10 +16,12 @@ import java.util.Objects;
 public class LogServiceImplementation implements LogService {
 
     private final LogRepository logRepository;
+    private final ValidateService validateService;
     private final ClientRepository clientRepository;
 
-    public LogServiceImplementation(LogRepository logRepository, ClientRepository clientRepository) {
+    public LogServiceImplementation(LogRepository logRepository, ValidateService validateService, ClientRepository clientRepository) {
         this.logRepository = logRepository;
+        this.validateService = validateService;
         this.clientRepository = clientRepository;
     }
 
@@ -47,7 +49,10 @@ public class LogServiceImplementation implements LogService {
 
     @Override
     public List<Log> searchLogs(Map<String, String> reqParam, String token) {
-        // TODO definisati pretragu
+
+        // TODO: search
+
+
         return logRepository.findAll();
     }
 }

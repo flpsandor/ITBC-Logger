@@ -17,9 +17,11 @@ import java.util.UUID;
 public class ClientServiceImplementation implements ClientService {
 
     private final ClientRepository clientRepository;
+    private final ValidateService validateService;
 
-    public ClientServiceImplementation(ClientRepository clientRepository) {
+    public ClientServiceImplementation(ClientRepository clientRepository, ValidateService validateService) {
         this.clientRepository = clientRepository;
+        this.validateService = validateService;
     }
 
     @Override
@@ -57,15 +59,10 @@ public class ClientServiceImplementation implements ClientService {
 
     @Override
     public Client passwordChange(Long id, PasswordDto password, String token) {
-        var validate = clientRepository.findByToken(token);
-        if (Objects.isNull(validate)) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Incorrect token");
-        }
-        if (!validate.getUserType().equals(UserType.ADMIN)) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Correct token, but not admin");
-        }
         var clientDb = clientRepository.findById(id).get();
-        clientDb.setPassword(password.getPassword());
+        if(validateService.validateToken(token)){
+            clientDb.setPassword(password.getPassword());
+        }
         return clientRepository.save(clientDb);
     }
 }
