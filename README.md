@@ -32,15 +32,15 @@ created date
   "email":"string"
 }
 ```
--Responses:
+###Responses:
 - 201 - Registered
 - 400 - Bad Request
-- email must be valid
-- username at least 3 characters
-- password at least 8 characters and one letter and one number and one special
+  - email must be valid
+  - username at least 3 characters
+  - password at least 8 characters and one letter and one number and one special
 - 409 - Conflict
-- username already exist
-- email already exist
+  - username already exist
+  - email already exist
 
 
 
