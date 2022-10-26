@@ -34,4 +34,5 @@ public class Client {
     message = "password at least 8 characters and one letter and one number and one character")
     private String password;
     private UserType userType = UserType.USER;
+    private Integer logCount = 0;
 }

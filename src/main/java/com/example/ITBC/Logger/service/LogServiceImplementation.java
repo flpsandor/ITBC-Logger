@@ -43,7 +43,13 @@ public class LogServiceImplementation implements LogService {
         if (Objects.isNull(clientRepository.findByToken(token))) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Incorrect token");
         }
-        log.setClientId(clientRepository.findByToken(token).getId());
+        var client = clientRepository.findByToken(token);
+        log.setClientId(client.getId());
+        // log count, not so good implementation
+        var count = client.getLogCount();
+        count++;
+        client.setLogCount(count);
+
         return logRepository.save(log);
     }
 
