@@ -17,16 +17,23 @@ public class ValidateService {
         this.clientRepository = clientRepository;
     }
 
-    public boolean validateToken(String token){
-        var validate = clientRepository.findByToken(token);
+    public boolean validateAdmin(String token){
+        var client = clientRepository.findByToken(token);
         boolean isTrue = true;
-        if (Objects.isNull(validate)) {
-            isTrue=false;
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Incorrect token");
-        }
-        if (!validate.getUserType().equals(UserType.ADMIN)) {
+        validateUser(token);
+        if (!client.getUserType().equals(UserType.ADMIN)) {
             isTrue=false;
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Correct token, but not admin");
+        }
+        return isTrue;
+    }
+
+    public boolean validateUser(String token){
+        var client = clientRepository.findByToken(token);
+        boolean isTrue = true;
+        if(Objects.isNull(client)){
+            isTrue=false;
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Incorrect token");
         }
         return isTrue;
     }

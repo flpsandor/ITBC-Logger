@@ -25,7 +25,7 @@ public class LogController {
     }
 
     @GetMapping("/api/logs/search")
-    public ResponseEntity<List<Log>> searchLogs(@RequestParam Map<String, String> reqParam, @RequestHeader(value="Authorization") String token){
+    public ResponseEntity<List<Log>> searchLogs(@RequestBody Map<String, String> reqParam, @RequestHeader(value="Authorization") String token){
         return new ResponseEntity<>(logService.searchLogs(reqParam,token), HttpStatus.OK);
     }
 }

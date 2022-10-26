@@ -24,15 +24,15 @@ created date
 1. Register
   - HTTP Method: 'POST'
   - Enpoint URL: '/api/clients/register'
-  - Request body:
-  ```json
-  {
-    "username":"string",
-    "password":"string",
-    "email":"string"
-  }
-  ```
-  Responses:
+    - Request body:
+    ```json
+    {
+      "username":"string",
+      "password":"string",
+      "email":"string"
+    }
+    ```
+  - Responses:
     - 201 - Registered
     - 400 - Bad Request
       - email must be valid
@@ -94,14 +94,12 @@ created date
     - 'Authorization' - token
   - Responses:
     - 200 - OK
-      ```json
-      [  
-        {
-          "message":"string",
-          "logType":0,
-          "createdDate":"date"
-        }
-      ]  
+      ```json 
+      {
+        "message":"string",
+        "logType":0,
+        //"createdDate":"date"
+      }
       ```
     - 400 - Bad request
       -Invalid dates

@@ -60,7 +60,7 @@ public class ClientServiceImplementation implements ClientService {
     @Override
     public Client passwordChange(Long id, PasswordDto password, String token) {
         var clientDb = clientRepository.findById(id).get();
-        if(validateService.validateToken(token)){
+        if(validateService.validateAdmin(token)){
             clientDb.setPassword(password.getPassword());
         }
         return clientRepository.save(clientDb);

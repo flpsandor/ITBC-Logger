@@ -49,10 +49,15 @@ public class LogServiceImplementation implements LogService {
 
     @Override
     public List<Log> searchLogs(Map<String, String> reqParam, String token) {
-
-        // TODO: search
-
-
-        return logRepository.findAll();
+        String message = null;
+        LogType logType = null; 
+        if(Objects.nonNull(reqParam.get("message"))){
+            message = reqParam.get("message");
+        }
+        if(Objects.nonNull(reqParam.get("logType"))){
+            logType = LogType.valueOf(reqParam.get("logType"));
+        }
+        validateService.validateUser(token);
+        return logRepository.findLogsByParam(message,logType);
     }
 }
