@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Builder
 public class Log {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long logId;
     @NotBlank
     private String message;

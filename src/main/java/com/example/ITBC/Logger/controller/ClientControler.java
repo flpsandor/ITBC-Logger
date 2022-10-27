@@ -40,4 +40,9 @@ public class ClientControler {
     public ResponseEntity<Client> passwordChange(@RequestBody PasswordDto password, @RequestHeader(value="Authorization") String token, @PathVariable("id") Long id){
         return new ResponseEntity<>(clientService.passwordChange(id,password,token),HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/api/clients/{id}/delete-cleint")
+    public ResponseEntity<Boolean> deleteClient(@PathVariable("id") Long id, @RequestHeader(value="Authorization") String token){
+        return new ResponseEntity<>(clientService.deleteUser(id, token), HttpStatus.OK);
+    }
 }

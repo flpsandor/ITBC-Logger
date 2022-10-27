@@ -65,4 +65,15 @@ public class ClientServiceImplementation implements ClientService {
         }
         return clientRepository.save(clientDb);
     }
+
+    @Override
+    public Boolean deleteUser(Long id, String token) {
+        if(validateService.validateAdmin(token)){
+            if(Objects.isNull(clientRepository.findById(id).get())){
+                throw new ResponseStatusException(HttpStatus.NO_CONTENT, "User not found");
+            }
+            clientRepository.deleteById(id);
+        }
+        return true;
+    }
 }

@@ -14,4 +14,6 @@ public interface ClientService {
     List<Client> getAllClient(String token);
 
     Client passwordChange(Long id, PasswordDto password, String token);
+
+    Boolean deleteUser(Long id, String token);
 }

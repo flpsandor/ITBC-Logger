@@ -24,12 +24,13 @@ created date
 1. Register
   - HTTP Method: 'POST'
   - Enpoint URL: '/api/clients/register'
-    - Request body:
+  - Request body:
     ```json
     {
       "username":"string",
       "password":"string",
-      "email":"string"
+      "email":"string",
+      "logType":"admin"
     }
     ```
   - Responses:
@@ -38,9 +39,9 @@ created date
       - email must be valid
       - username at least 3 characters
       - password at least 8 characters and one letter and one number and one special
-  - 409 - Conflict
-      - username already exist
-      - email already exist
+    - 409 - Conflict
+        - username already exist
+        - email already exist
 
 2. Login
   - HTTP Method: 'POST'
@@ -101,11 +102,11 @@ created date
         //"createdDate":"date"
       }
       ```
-    - 400 - Bad request
-      -Invalid dates
-      -Invalid logType
-    - 401 - Unauthorized
-      -Incorrect token
+    - 400 - Bad request 
+      - Invalid dates 
+      - Invalid logType
+    - 401 - Unauthorized 
+      - Incorrect token
 5. Get all clients
   - HTTP Method: 'GET'
   - Endpoint URL: '/api/clients'
@@ -124,12 +125,12 @@ created date
       ]
       ```
    - 401 - Unauthorized
-    - Incorrect token
+     - Incorrect token
    - 403 - Frobidden
      - Correct token, but not admin
 
 6. Change client password
-  - HTTP Methdo: 'PATCH'
+  - HTTP Method: 'PATCH'
   - Endpoint URL: '/api/clients/{id}/reset-password'
   - Request body:
     ```json
@@ -141,8 +142,39 @@ created date
      -'Authorization' - token (Admin token)
    - Responses:
      - 204 - No content      
-     - 401 - Unauthorized
-      -Correct token, but not admin
+     - 401 - Unauthorized 
+       - Correct token, but not admin
      - 403 - Forbidden
-      -Incorrect token
-
+       - Incorrect token
+     
+7. Delete user
+    - HTTP Method: 'DELETE'
+    - Endpoint URL: '/api/clients/{id}/reset-password'
+    - Request headers:
+      - 'Authorization' - token (Admin token)
+    - Responses:
+      - 204 - No content
+      - 401 - Unauthorized 
+        - Correct token, but not admin
+      - 403 - Forbidden
+        - Incorrect token
+      
+8. Update user
+    - HTTP Method: 'PUT'
+    - Endpoint URL /api/clients/{id}/update
+    - Request headers:
+      - 'Authorization' - token (Exact user or admin token)
+    - Request body:
+    ```json
+    {
+      "username":"string",
+      "password": "string",
+      "email": "email"
+    }
+    ```
+    - Responses:
+      - 204 - No content
+      - 401 - Unauthorized 
+        - Correct token, but not admin
+      - 403 - Forbidden
+        - Incorrect token
