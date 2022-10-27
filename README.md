@@ -139,7 +139,7 @@ created date
       }
     ```
    - Request headers:
-     -'Authorization' - token (Admin token)
+     -'Authorization' - token (Admin token or exact user token)
    - Responses:
      - 204 - No content      
      - 401 - Unauthorized 

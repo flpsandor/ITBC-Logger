@@ -63,6 +63,9 @@ public class ClientServiceImplementation implements ClientService {
         if (validateService.validateAdmin(token)) {
             clientDb.setPassword(password.getPassword());
         }
+        if(validateService.validateUser(token) && token.equals(clientDb.getToken())){
+            clientDb.setPassword(password.getPassword());
+        }
         return clientRepository.save(clientDb);
     }
 
