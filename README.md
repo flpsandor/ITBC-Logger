@@ -1,7 +1,7 @@
 # ITBC-Logger
 The final product for IT Bootcamp. Implementation of simple logger Rest API with Springboot, JPA, H2 database. 
 
-Business Requirements, MVP (Minimum Viable Product)
+## Business Requirements, MVP (Minimum Viable Product)
 ## User
 - The user can register
 username, email, password
