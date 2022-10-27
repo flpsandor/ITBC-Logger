@@ -26,6 +26,6 @@ public class Log {
     @NotNull
     private LogType logType;
     @NotNull
-    private LocalDateTime date = LocalDateTime.now();
+    private LocalDateTime logDate = LocalDateTime.now();
     private Long clientId;
 }

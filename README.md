@@ -99,7 +99,8 @@ created date
       {
         "message":"string",
         "logType":0,
-        //"createdDate":"date"
+        "dateFrom":"date",
+        "dateTo":"date"
       }
       ```
     - 400 - Bad request 

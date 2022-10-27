@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -56,15 +57,23 @@ public class LogServiceImplementation implements LogService {
     @Override
     public List<Log> searchLogs(Map<String, String> reqParam, String token) {
         String message = null;
-        LogType logType = null; 
+        LogType logType = null;
+        LocalDateTime dateFrom = null;
+        LocalDateTime dateTo = null;
         if(Objects.nonNull(reqParam.get("message"))){
             message = reqParam.get("message");
         }
         if(Objects.nonNull(reqParam.get("logType"))){
             logType = LogType.valueOf(reqParam.get("logType"));
         }
+        if(Objects.nonNull(reqParam.get("dateFrom"))){
+            dateFrom = LocalDateTime.parse(reqParam.get("dateFrom"));
+        }
+        if(Objects.nonNull(reqParam.get("dateTo"))){
+            dateTo = LocalDateTime.parse(reqParam.get("dateTo"));
+        }
         validateService.validateUser(token);
-        return logRepository.findLogsByParam(message,logType);
+        return logRepository.findLogsByParam(message,logType,dateFrom, dateTo);
     }
 
     @Override
