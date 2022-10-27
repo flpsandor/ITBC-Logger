@@ -149,32 +149,28 @@ created date
      
 7. Delete user
     - HTTP Method: 'DELETE'
-    - Endpoint URL: '/api/clients/{id}/reset-password'
+    - Endpoint URL: '/api/clients/{id}/delete-client'
     - Request headers:
       - 'Authorization' - token (Admin token)
     - Responses:
+      - 200 -OK
       - 204 - No content
       - 401 - Unauthorized 
         - Correct token, but not admin
-      - 403 - Forbidden
+        - 403 - Forbidden
         - Incorrect token
-      
-8. Update user
-    - HTTP Method: 'PUT'
-    - Endpoint URL /api/clients/{id}/update
+
+8. Delete log
+    - HTTP Method: 'DELETE'
+    - Endpoint URL: '/api/logs/{id}/delete-log'
     - Request headers:
-      - 'Authorization' - token (Exact user or admin token)
-    - Request body:
-    ```json
-    {
-      "username":"string",
-      "password": "string",
-      "email": "email"
-    }
-    ```
+        - 'Authorization' - token (Admin token)
     - Responses:
-      - 204 - No content
-      - 401 - Unauthorized 
-        - Correct token, but not admin
-      - 403 - Forbidden
-        - Incorrect token
+        - 200 -OK
+        - 204 - No content
+        - 401 - Unauthorized
+            - Correct token, but not admin
+        - 403 - Forbidden
+          - Incorrect token
+      
+

@@ -10,4 +10,5 @@ public interface LogService {
 
     List<Log> searchLogs(Map<String, String> reqParam, String token);
 
+    Boolean deleteLog(Long id, String token);
 }

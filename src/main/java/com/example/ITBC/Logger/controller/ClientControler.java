@@ -22,27 +22,28 @@ public class ClientControler {
 
     @PostMapping("/api/clients/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Client> register(@RequestBody @Valid Client client){
+    public ResponseEntity<Client> register(@RequestBody @Valid Client client) {
         return new ResponseEntity<>(clientService.register(client), HttpStatus.CREATED);
     }
 
     @PostMapping("/api/clients/login")
-    public ResponseEntity<String> login(@RequestBody @Valid LoginDto loginDto){
+    public ResponseEntity<String> login(@RequestBody @Valid LoginDto loginDto) {
         return new ResponseEntity<>(clientService.login(loginDto), HttpStatus.OK);
     }
 
     @GetMapping("/api/clients")
-    public ResponseEntity<List<Client>> getAllClient(@RequestHeader(value="Authorization") String token){
+    public ResponseEntity<List<Client>> getAllClient(@RequestHeader(value = "Authorization") String token) {
         return new ResponseEntity<>(clientService.getAllClient(token), HttpStatus.OK);
     }
 
     @PatchMapping("/api/clients/{id}/reset-password")
-    public ResponseEntity<Client> passwordChange(@RequestBody PasswordDto password, @RequestHeader(value="Authorization") String token, @PathVariable("id") Long id){
-        return new ResponseEntity<>(clientService.passwordChange(id,password,token),HttpStatus.CREATED);
+    public ResponseEntity<Client> passwordChange(@RequestBody PasswordDto password, @RequestHeader(value = "Authorization") String token, @PathVariable("id") Long id) {
+        return new ResponseEntity<>(clientService.passwordChange(id, password, token), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/api/clients/{id}/delete-cleint")
-    public ResponseEntity<Boolean> deleteClient(@PathVariable("id") Long id, @RequestHeader(value="Authorization") String token){
+    @DeleteMapping("/api/clients/{id}/delete-client")
+    public ResponseEntity<Boolean> deleteClient(@PathVariable("id") Long id, @RequestHeader(value = "Authorization") String token) {
         return new ResponseEntity<>(clientService.deleteUser(id, token), HttpStatus.OK);
     }
+
 }

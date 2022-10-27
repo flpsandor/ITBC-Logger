@@ -60,7 +60,7 @@ public class ClientServiceImplementation implements ClientService {
     @Override
     public Client passwordChange(Long id, PasswordDto password, String token) {
         var clientDb = clientRepository.findById(id).get();
-        if(validateService.validateAdmin(token)){
+        if (validateService.validateAdmin(token)) {
             clientDb.setPassword(password.getPassword());
         }
         return clientRepository.save(clientDb);
@@ -68,8 +68,8 @@ public class ClientServiceImplementation implements ClientService {
 
     @Override
     public Boolean deleteUser(Long id, String token) {
-        if(validateService.validateAdmin(token)){
-            if(Objects.isNull(clientRepository.findById(id).get())){
+        if (validateService.validateAdmin(token)) {
+            if (Objects.isNull(clientRepository.findById(id))) {
                 throw new ResponseStatusException(HttpStatus.NO_CONTENT, "User not found");
             }
             clientRepository.deleteById(id);

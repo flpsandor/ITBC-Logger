@@ -66,4 +66,15 @@ public class LogServiceImplementation implements LogService {
         validateService.validateUser(token);
         return logRepository.findLogsByParam(message,logType);
     }
+
+    @Override
+    public Boolean deleteLog(Long id, String token) {
+        if (validateService.validateAdmin(token)) {
+            if (Objects.isNull(logRepository.findById(id))) {
+                throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Log not found");
+            }
+            logRepository.deleteById(id);
+        }
+        return true;
+    }
 }

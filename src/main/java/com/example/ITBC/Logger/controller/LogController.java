@@ -28,4 +28,9 @@ public class LogController {
     public ResponseEntity<List<Log>> searchLogs(@RequestBody Map<String, String> reqParam, @RequestHeader(value="Authorization") String token){
         return new ResponseEntity<>(logService.searchLogs(reqParam,token), HttpStatus.OK);
     }
+
+    @DeleteMapping("/api/clients/{id}/delete-log")
+    public ResponseEntity<Boolean> deleteLog(@PathVariable("id") Long id, @RequestHeader(value = "Authorization") String token) {
+        return new ResponseEntity<>(logService.deleteLog(id, token), HttpStatus.OK);
+    }
 }
